@@ -1,0 +1,49 @@
+@model PayPlus.Models.Partner
+
+@{
+    ViewData["Title"] = "Dodaj partnerja";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>@ViewData["Title"]</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="@(Model?.Id == 0 ? "Create" : "Edit")">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control"/>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="VAT_number" class="form-label"></label>
+                <input asp-for="VAT_number" class="form-control"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Address" class="form-label"></label>
+                <input asp-for="Address" class="form-control"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Postal_code" class="form-label"></label>
+                <input asp-for="Postal_code" class="form-control"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="City" class="form-label"></label>
+                <input asp-for="City" class="form-control"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Country" class="form-label"></label>
+                <input asp-for="Country" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-success">
+                <i class="ti ti-check"></i> Shrani
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="ti ti-arrow-left"></i> Nazaj
+            </a>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}
