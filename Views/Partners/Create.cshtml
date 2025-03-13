@@ -12,7 +12,7 @@
         <form asp-action="@(Model?.Id == 0 ? "Create" : "Edit")">
             <div class="mb-3">
                 <label asp-for="Name" class="form-label"></label>
-                <input asp-for="Name" class="form-control"/>
+                <input asp-for="Name" class="form-control" type="text" />
             </div>
             
             <div class="mb-3">
@@ -44,6 +44,3 @@
         </form>
     </div>
 </div>
-@section Scripts {
-    <script src="~/js/site.js"></script>
-}
