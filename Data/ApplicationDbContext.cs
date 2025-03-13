@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PayPlus.Models;
 
@@ -12,5 +12,7 @@ public class ApplicationDbContext : IdentityDbContext
     }
     
     public DbSet<Partner> Partners { get; set; }
+
+public DbSet<PayPlus.Models.Service> Service { get; set; } = default!;
 }
 
