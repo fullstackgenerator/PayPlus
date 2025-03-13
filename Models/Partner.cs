@@ -5,7 +5,7 @@ namespace PayPlus.Models
     {
         public required int Id { get; set; }
         
-        [Display(Name = "Ime")]
+        [Display(Name = "Naziv")]
         public required string Name { get; set; }
         
         [Display(Name = "Davčna številka")]
