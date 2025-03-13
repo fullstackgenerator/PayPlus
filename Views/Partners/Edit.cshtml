@@ -4,56 +4,48 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Partner</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="container">
+    <h4 class="py-4 font-weight-bold">Uredi partnerja</h4>
+<div class="card mt-3 w-50">
+    <div class="card-body">
+     
+        <form asp-action="Edit" method="POST">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+
+            <div class="mb-3">
+                <input asp-for="Name" class="form-control" placeholder="Partner Name" value="@Model.Name" required />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="VAT_number" class="control-label"></label>
-                <input asp-for="VAT_number" class="form-control" />
+
+            <div class="mb-3">
+                <input asp-for="VAT_number" class="form-control" placeholder="VAT Number" value="@Model.VAT_number" required />
                 <span asp-validation-for="VAT_number" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+
+            <div class="mb-3">
+                <input asp-for="Address" class="form-control" placeholder="Address" value="@Model.Address" required />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Postal_code" class="control-label"></label>
-                <input asp-for="Postal_code" class="form-control" />
+
+            <div class="mb-3">
+                <input asp-for="Postal_code" class="form-control" placeholder="Postal Code" value="@Model.Postal_code" required />
                 <span asp-validation-for="Postal_code" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
+
+            <div class="mb-3">
+                <input asp-for="City" class="form-control" placeholder="City" value="@Model.City" required />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
-                <input asp-for="Country" class="form-control" />
+
+            <div class="mb-3">
+                <input asp-for="Country" class="form-control" placeholder="Country" value="@Model.Country" required />
                 <span asp-validation-for="Country" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Shrani" class="btn btn-primary" />
-            </div>
+
+            <button type="submit" class="btn btn-primary">Potrdi</button>
+            <a asp-action="Index" class="btn btn-secondary">Nazaj</a>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">nazaj</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
