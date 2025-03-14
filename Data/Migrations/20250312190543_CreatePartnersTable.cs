@@ -21,7 +21,9 @@ namespace PayPlus.Data.Migrations
                     Address = table.Column<string>(type: "TEXT", nullable: false),
                     Postal_code = table.Column<int>(type: "INTEGER", nullable: false),
                     City = table.Column<string>(type: "TEXT", nullable: false),
-                    Country = table.Column<string>(type: "TEXT", nullable: false)
+                    Country = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Phone = table.Column<string>(type: "TEXT", nullable: false),
                 },
                 constraints: table =>
                 {

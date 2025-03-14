@@ -17,8 +17,6 @@ namespace PayPlus.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    EventDte = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EventLocation = table.Column<string>(type: "TEXT", nullable: false),
                     ServiceName = table.Column<string>(type: "TEXT", nullable: false),
                     ServiceDescription = table.Column<string>(type: "TEXT", nullable: false),
                     Price = table.Column<decimal>(type: "TEXT", nullable: false)

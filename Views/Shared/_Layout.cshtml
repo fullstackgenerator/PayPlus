@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="sl">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,7 +14,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container-fluid">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                 <img src="~/ruble_16580570.png" alt="PayPlus Logo" height="50">
@@ -24,20 +24,63 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Services"
-                           asp-action="Index">Storitve</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Partners"
-                           asp-action="Index">Partnerji</a>
-                    </li>
-                </ul>
-                <partial name="_LoginPartial"/>
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <a asp-area="" asp-controller="Services" asp-action="Index" class="btn btn-outline-secondary text-white">
+                    Storitve
+                </a>
+                <a asp-area="" asp-controller="Partners" asp-action="Index" class="btn btn-outline-secondary text-white">
+                    Partnerji
+                </a>
+                <a asp-area="" asp-controller="Partners" asp-action="Index" class="btn btn-outline-secondary text-white">
+                    Koledar
+                </a>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dokumenti
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Ponudbe</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Računi</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Potni nalogi</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Poročila in izvoz</a></li>
+                    </ul>
+                </div>
             </div>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"></div>
         </div>
+
+        @using Microsoft.AspNetCore.Identity
+        @inject SignInManager<IdentityUser> SignInManager
+        @inject UserManager<IdentityUser> UserManager
+
+        <div class="dropdown text-end mx-5">
+            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="User Avatar" width="32" height="32" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profil</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form class="d-inline" asp-area="Identity" asp-page="/Account/Logout"
+                              asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="dropdown-item">Odjava</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                }
+            </ul>
+        </div>
+
     </nav>
 </header>
 <div class="container">
@@ -46,11 +89,6 @@
     </main>
 </div>
 
-@* <footer class="border-top footer text-muted"> *@
-@*     <div class="container"> *@
-@*         &copy; 2025 - PayPlus - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
-@*     </div> *@
-@* </footer> *@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>

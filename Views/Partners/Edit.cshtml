@@ -1,51 +1,76 @@
 @model PayPlus.Models.Partner
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Uredi partnerja";
 }
 
-<div class="container">
-    <h4 class="py-4 font-weight-bold">Uredi partnerja</h4>
-<div class="card mt-3 w-50">
-    <div class="card-body">
-     
-        <form asp-action="Edit" method="POST">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+<div class="container d-flex justify-content-center">
+    <div class="card w-50 mt-5">
+        <div class="card-header">
+            <h5>@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="POST">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id"/>
 
-            <div class="mb-3">
-                <input asp-for="Name" class="form-control" placeholder="Partner Name" value="@Model.Name" required />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+                <div class="row">
+                    <div class="col-md-6 py-2">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" type="text" required/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
-            <div class="mb-3">
-                <input asp-for="VAT_number" class="form-control" placeholder="VAT Number" value="@Model.VAT_number" required />
-                <span asp-validation-for="VAT_number" class="text-danger"></span>
-            </div>
+                    <div class="col-md-6 py-2">
+                        <label asp-for="VAT_number" class="form-label"></label>
+                        <input asp-for="VAT_number" class="form-control" required/>
+                        <span asp-validation-for="VAT_number" class="text-danger"></span>
+                    </div>
 
-            <div class="mb-3">
-                <input asp-for="Address" class="form-control" placeholder="Address" value="@Model.Address" required />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
+                    <div class="col-md-6 py-2">
+                        <label asp-for="Address" class="form-label"></label>
+                        <input asp-for="Address" class="form-control" required/>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
 
-            <div class="mb-3">
-                <input asp-for="Postal_code" class="form-control" placeholder="Postal Code" value="@Model.Postal_code" required />
-                <span asp-validation-for="Postal_code" class="text-danger"></span>
-            </div>
+                    <div class="col-md-6 py-2">
+                        <label asp-for="Postal_code" class="form-label"></label>
+                        <input asp-for="Postal_code" class="form-control" required/>
+                        <span asp-validation-for="Postal_code" class="text-danger"></span>
+                    </div>
 
-            <div class="mb-3">
-                <input asp-for="City" class="form-control" placeholder="City" value="@Model.City" required />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
+                    <div class="col-md-6 py-2">
+                        <label asp-for="City" class="form-label"></label>
+                        <input asp-for="City" class="form-control" required/>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
 
-            <div class="mb-3">
-                <input asp-for="Country" class="form-control" placeholder="Country" value="@Model.Country" required />
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
+                    <div class="col-md-6 py-2">
+                        <label asp-for="Country" class="form-label"></label>
+                        <input asp-for="Country" class="form-control" required/>
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
 
-            <button type="submit" class="btn btn-primary">Potrdi</button>
-            <a asp-action="Index" class="btn btn-secondary">Nazaj</a>
-        </form>
+                    <div class="col-md-6 py-2">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" required/>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="Phone" class="form-label"></label>
+                        <input asp-for="Phone" class="form-control" required/>
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary my-2 pr-2">
+                    <i class="ti ti-check"></i> Shrani
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="ti ti-arrow-left"></i> Nazaj
+                </a>
+            </form>
+        </div>
     </div>
-</div>
 </div>

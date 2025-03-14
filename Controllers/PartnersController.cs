@@ -54,7 +54,7 @@ namespace PayPlus.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,VAT_number,Address,Postal_code,City,Country")] Partner partner)
+        public async Task<IActionResult> Create([Bind("Id,Name,VAT_number,Address,Postal_code,City,Country,Email,Phone")] Partner partner)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace PayPlus.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,VAT_number,Address,Postal_code,City,Country")] Partner partner)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,VAT_number,Address,Postal_code,City,Country,Email,Phone")] Partner partner)
         {
             if (id != partner.Id)
             {
