@@ -1,60 +1,37 @@
 @model PayPlus.Models.Service
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Edit";
 }
 
-<!DOCTYPE html>
+<div class="container">
+    <h4 class="py-4 font-weight-bold">Uredi storitev</h4>
+    <div class="card mt-3 w-50">
+        <div class="card-body">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
+            <form asp-action="Edit" method="POST">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
 
-<h4>Service</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="EventDte" class="control-label"></label>
-                <input asp-for="EventDte" class="form-control" />
-                <span asp-validation-for="EventDte" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EventLocation" class="control-label"></label>
-                <input asp-for="EventLocation" class="form-control" />
-                <span asp-validation-for="EventLocation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ServiceName" class="control-label"></label>
-                <input asp-for="ServiceName" class="form-control" />
-                <span asp-validation-for="ServiceName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ServiceDescription" class="control-label"></label>
-                <input asp-for="ServiceDescription" class="form-control" />
-                <span asp-validation-for="ServiceDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="mb-3">
+                    <input asp-for="ServiceName" class="form-control" placeholder="Service Name" value="@Model.ServiceName" required />
+                    <span asp-validation-for="ServiceName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input asp-for="ServiceDescription" class="form-control" placeholder="Service Description" value="@Model.ServiceDescription" required />
+                    <span asp-validation-for="ServiceDescription" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input asp-for="Price" class="form-control" placeholder="Price" value="@Model.Price" required />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Potrdi</button>
+                <a asp-action="Index" class="btn btn-secondary">Nazaj</a>
+            </form>
+
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-</body>
-</html>

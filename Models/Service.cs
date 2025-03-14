@@ -4,12 +4,6 @@ namespace PayPlus.Models;
 public class Service
 {
     public int Id { get; set; }
-
-    [Display(Name = "Datum dogodka")]
-    public DateTime EventDte { get; set; }
-    
-    [Display(Name = "Kraj dogodka")]
-    public string EventLocation { get; set; }
     
     [Display(Name = "Ime storitve")]
     public string ServiceName { get; set; }
