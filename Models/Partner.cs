@@ -22,5 +22,11 @@ namespace PayPlus.Models
         
         [Display(Name = "Država")]
         public required string Country { get; set; }
+        
+        [Display(Name = "E-naslov")]
+        public required string Email { get; set; }
+        
+        [Display(Name = "Telefon")]
+        public required string Phone { get; set; }
     }
 }

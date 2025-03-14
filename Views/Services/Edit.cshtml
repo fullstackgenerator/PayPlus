@@ -11,20 +11,23 @@
 
             <form asp-action="Edit" method="POST">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Id"/>
 
                 <div class="mb-3">
-                    <input asp-for="ServiceName" class="form-control" placeholder="Service Name" value="@Model.ServiceName" required />
+                    <input asp-for="ServiceName" class="form-control" placeholder="Service Name"
+                           value="@Model.ServiceName" required/>
                     <span asp-validation-for="ServiceName" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <input asp-for="ServiceDescription" class="form-control" placeholder="Service Description" value="@Model.ServiceDescription" required />
+                    <input asp-for="ServiceDescription" class="form-control" placeholder="Service Description"
+                           value="@Model.ServiceDescription" required/>
                     <span asp-validation-for="ServiceDescription" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <input asp-for="Price" class="form-control" placeholder="Price" value="@Model.Price" required />
+                    <input asp-for="Price" class="form-control" placeholder="Price" value="@Model.Price" type="number"
+                           step="0.01" min="0" required/>
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
 

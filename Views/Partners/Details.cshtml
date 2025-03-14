@@ -1,47 +1,60 @@
 @model PayPlus.Models.Partner
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Podrobnosti partnerja";
 }
 
-<div class="container">
-    <h4 class="py-4 font-weight-bold">Podrobnosti partnerja</h4>
-    <div class="card mt-3 w-50">
+<div class="container d-flex justify-content-center">
+    <div class="card w-50 mt-5">
+        <div class="card-header">
+            <h5>@ViewData["Title"]</h5>
+        </div>
         <div class="card-body">
-        <table class="table table-striped">
-     
-            <tbody>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Name)</td>
-                <td>@Html.DisplayFor(model => model.Name)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.VAT_number)</td>
-                <td>@Html.DisplayFor(model => model.VAT_number)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Address)</td>
-                <td>@Html.DisplayFor(model => model.Address)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Postal_code)</td>
-                <td>@Html.DisplayFor(model => model.Postal_code)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.City)</td>
-                <td>@Html.DisplayFor(model => model.City)</td>
-            </tr>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Country)</td>
-                <td>@Html.DisplayFor(model => model.Country)</td>
-            </tr>
-            </tbody>
-        </table>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.VAT_number)</strong></td>
+                    <td>@Html.DisplayFor(model => model.VAT_number)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Address)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Address)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Postal_code)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Postal_code)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.City)</strong></td>
+                    <td>@Html.DisplayFor(model => model.City)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Country)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Country)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Email)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Email)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Phone)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Phone)</td>
+                </tr>
+                </tbody>
+            </table>
 
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Uredi</a>
-            <a asp-action="Index" class="btn btn-secondary">Nazaj</a>
+            <div class="d-flex justify-content-between">
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">
+                    <i class="ti ti-pencil"></i> Uredi
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="ti ti-arrow-left"></i> Nazaj
+                </a>
+            </div>
         </div>
     </div>
-</div>
 </div>
