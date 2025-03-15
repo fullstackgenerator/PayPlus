@@ -4,30 +4,36 @@
     ViewData["Title"] = "Podrobnosti storitve";
 }
 
-<div class="container">
-    <h4 class="py-4 font-weight-bold">Podrobnosti storitve</h4>
-    <div class="card mt-3 w-50">
+<div class="container d-flex justify-content-center">
+    <div class="card w-50 mt-5">
+        <div class="card-header">
+            <h5>@ViewData["Title"]</h5>
+        </div>
         <div class="card-body">
             <table class="table table-striped">
                 <tbody>
                 <tr>
-                    <td>@Html.DisplayNameFor(model => model.ServiceName)</td>
+                    <td><strong>@Html.DisplayNameFor(model => model.ServiceName)</strong></td>
                     <td>@Html.DisplayFor(model => model.ServiceName)</td>
                 </tr>
                 <tr>
-                    <td>@Html.DisplayNameFor(model => model.ServiceDescription)</td>
+                    <td><strong>@Html.DisplayNameFor(model => model.ServiceDescription)</strong></td>
                     <td>@Html.DisplayFor(model => model.ServiceDescription)</td>
                 </tr>
                 <tr>
-                    <td>@Html.DisplayNameFor(model => model.Price)</td>
+                    <td><strong>@Html.DisplayNameFor(model => model.Price)</strong></td>
                     <td>@Html.DisplayFor(model => model.Price)</td>
                 </tr>
                 </tbody>
             </table>
 
-            <div>
-                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Uredi</a>
-                <a asp-action="Index" class="btn btn-secondary">Nazaj</a>
+            <div class="mt-3">
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">
+                    <i class="ti ti-pencil"></i> Uredi
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="ti ti-arrow-left"></i> Nazaj
+                </a>
             </div>
         </div>
     </div>
