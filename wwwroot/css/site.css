@@ -17,7 +17,7 @@ html {
   min-height: 100%;
 }
 
-body {
+boy {
   margin-bottom: 60px;
   background-color: #f5f5f5;
 }
@@ -32,5 +32,37 @@ body {
 }
 
 .navbar {
-  background: linear-gradient(to right, #343a40, #5a6268);
+  background: linear-gradient(141deg, rgba(6,0,111,1) 0%, rgba(12,2,184,0.6391806722689075) 38%, rgba(126,121,214,0.6755952380952381) 69%, rgba(245,245,245,1) 100%);
+}
+
+.nav-button:hover {
+  background-color: transparent;
+  filter: brightness(170%);
+}
+
+.button-dodaj-storitev-partnerja {
+  background-color: #ffd400;
+  color: black;
+  filter: contrast(100%);
+  border-color: black;
+}
+
+.button-dodaj-storitev-partnerja:hover {
+  background-color: #ffd400;
+  filter: contrast(110%);
+  border-color: #1a1d20;
+  color: black;
+}
+
+.fc-daygrid-day {
+  @apply border border-gray-200;
+}
+.fc-daygrid-day-number {
+  @apply text-gray-800 font-semibold;
+}
+.fc-toolbar-title {
+  @apply text-2xl font-bold text-gray-900;
+}
+.fc-button {
+  @apply bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800;
 }
