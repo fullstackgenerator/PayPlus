@@ -12,11 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        events: [
-            { title: 'Meeting', start: '2024-03-15T10:00:00' },
-            { title: 'Project Deadline', start: '2024-03-18' },
-            { title: 'Lunch', start: '2024-03-20T12:00:00' }
-        ],
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source'
     });
     calendar.render();
