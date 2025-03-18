@@ -1,0 +1,81 @@
+@model PayPlus.Models.TravelOrder
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TravelOrder</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.order_date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.order_date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_start)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_start)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_end)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_end)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.location_start)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.location_start)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.location_end)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.location_end)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.full_name_driver)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.full_name_driver)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.car_brand_and_model)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.car_brand_and_model)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.car_type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.car_type)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.trip_reason)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.trip_reason)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.full_name_organizer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.full_name_organizer)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="order_id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

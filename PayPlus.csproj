@@ -26,4 +26,12 @@
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\TravelOrder\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TravelOrder\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TravelOrder\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TravelOrder\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TravelOrder\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

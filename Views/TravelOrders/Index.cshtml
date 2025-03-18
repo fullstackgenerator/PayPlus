@@ -1,0 +1,89 @@
+@model IEnumerable<PayPlus.Models.TravelOrder>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.order_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_end)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.location_start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.location_end)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.full_name_driver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.car_brand_and_model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.car_type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.trip_reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.full_name_organizer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_end)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location_start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location_end)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.full_name_driver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.car_brand_and_model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.car_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.trip_reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.full_name_organizer)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.order_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.order_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.order_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
