@@ -20,35 +20,37 @@
     <div class="card-body">
         <table class="table table-striped table-bordered">
             <thead>
-                <tr>
-                    <th class="text-left">@Html.DisplayNameFor(model => model.First().order_date)</th>
-                    <th class="text-center">@Html.DisplayNameFor(model => model.First().date_start)</th>
-                    <th class="text-center">@Html.DisplayNameFor(model => model.First().date_end)</th>
-                    <th class="text-center">@Html.DisplayNameFor(model => model.First().location_start)</th>
-                    <th class="text-center">@Html.DisplayNameFor(model => model.First().location_end)</th>
-                    <th class="text-center">@Html.DisplayNameFor(model => model.First().full_name_driver)</th>
-                    <th class="text-center">@Html.DisplayNameFor(model => model.First().car_brand_and_model)</th>
-                    <th class="text-center">@Html.DisplayNameFor(model => model.First().car_type)</th>
-                    <th class="text-center">@Html.DisplayNameFor(model => model.First().trip_reason)</th>
-                    <th class="text-center">@Html.DisplayNameFor(model => model.First().full_name_organizer)</th>
-                    <th class="text-center">Možnosti</th>
-                </tr>
+            <tr>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().order_id)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().order_date)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().date_start)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().date_end)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().location_start)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().location_end)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().full_name_driver)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().car_brand_and_model)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().car_type)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().trip_reason)</th>
+                <th class="text-left">@Html.DisplayNameFor(model => model.First().full_name_organizer)</th>
+                <th class="text-left">Možnosti</th>
+            </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.Select((travelOrder, index) => new { travelOrder, index }))
                 {
                     <tr>
+                        <td class="text-left">@item.travelOrder.order_id</td>
                         <td class="text-left">@item.travelOrder.order_date.ToString("dd.MM.yyyy")</td>
-                        <td class="text-center">@item.travelOrder.date_start.ToString("dd.MM.yyyy")</td>
-                        <td class="text-center">@item.travelOrder.date_end.ToString("dd.MM.yyyy")</td>
-                        <td class="text-center">@item.travelOrder.location_start</td>
-                        <td class="text-center">@item.travelOrder.location_end</td>
-                        <td class="text-center">@item.travelOrder.full_name_driver</td>
-                        <td class="text-center">@item.travelOrder.car_brand_and_model</td>
-                        <td class="text-center">@item.travelOrder.car_type</td>
-                        <td class="text-center">@item.travelOrder.trip_reason</td>
-                        <td class="text-center">@item.travelOrder.full_name_organizer</td>
-                        <td class="text-center">
+                        <td class="text-left">@item.travelOrder.date_start.ToString("dd.MM.yyyy")</td>
+                        <td class="text-left">@item.travelOrder.date_end.ToString("dd.MM.yyyy")</td>
+                        <td class="text-left">@item.travelOrder.location_start</td>
+                        <td class="text-left">@item.travelOrder.location_end</td>
+                        <td class="text-left">@item.travelOrder.full_name_driver</td>
+                        <td class="text-left">@item.travelOrder.car_brand_and_model</td>
+                        <td class="text-left">@item.travelOrder.car_type</td>
+                        <td class="text-left">@item.travelOrder.trip_reason</td>
+                        <td class="text-left">@item.travelOrder.full_name_organizer</td>
+                        <td class="text-left">
                             <div class="d-flex justify-content-center">
                                 <a class="btn btn-outline-success btn-sm mx-1" asp-action="Edit"
                                    asp-route-id="@item.travelOrder.order_id">
@@ -59,10 +61,15 @@
                                    asp-route-id="@item.travelOrder.order_id">
                                     <i class="ti ti-eye"></i> Podrobnosti
                                 </a>
-
+                            </div>
+                            <div class="d-flex justify-content-center pt-2">
                                 <a class="btn btn-outline-danger btn-sm mx-1" asp-action="Delete"
                                    asp-route-id="@item.travelOrder.order_id">
                                     <i class="ti ti-trash"></i> Izbriši
+                                </a>
+                                <a class="btn btn-outline-secondary btn-sm mx-1" asp-action="Delete"
+                                   asp-route-id="@item.travelOrder.order_id">
+                                    <i class="ti ti-export"></i> Izvozi
                                 </a>
                             </div>
                         </td>

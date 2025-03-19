@@ -54,7 +54,7 @@ namespace PayPlus.Views_TravelOrder
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("order_id,order_date,date_start,date_end,location_start,location_end,full_name_driver,car_brand_and_model,car_type,trip_reason,full_name_organizer")] TravelOrder travelOrder)
+        public async Task<IActionResult> Create([Bind("order_date,date_start,date_end,location_start,location_end,full_name_driver,car_brand_and_model,car_type,trip_reason,full_name_organizer")] TravelOrder travelOrder)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace PayPlus.Views_TravelOrder
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("order_id,order_date,date_start,date_end,location_start,location_end,full_name_driver,car_brand_and_model,car_type,trip_reason,full_name_organizer")] TravelOrder travelOrder)
+        public async Task<IActionResult> Edit(int id, [Bind("order_date,date_start,date_end,location_start,location_end,full_name_driver,car_brand_and_model,car_type,trip_reason,full_name_organizer")] TravelOrder travelOrder)
         {
             if (id != travelOrder.order_id)
             {
