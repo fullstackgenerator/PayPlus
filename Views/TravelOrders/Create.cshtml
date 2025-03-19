@@ -1,76 +1,87 @@
 @model PayPlus.Models.TravelOrder
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodaj potni nalog";
 }
 
-<h1>Create</h1>
+<div class="container d-flex justify-content-center">
+    <div class="card w-50 mt-5">
+        <div class="card-header">
+            <h5>@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div class="row">
+                    <div class="col-md-6 py-2">
+                        <label asp-for="order_date" class="form-label"></label>
+                        <input asp-for="order_date" class="form-control" type="date"/>
+                        <span asp-validation-for="order_date" class="text-danger"></span>
+                    </div>
 
-<h4>TravelOrder</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="order_date" class="control-label"></label>
-                <input asp-for="order_date" class="form-control" />
-                <span asp-validation-for="order_date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="date_start" class="control-label"></label>
-                <input asp-for="date_start" class="form-control" />
-                <span asp-validation-for="date_start" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="date_end" class="control-label"></label>
-                <input asp-for="date_end" class="form-control" />
-                <span asp-validation-for="date_end" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="location_start" class="control-label"></label>
-                <input asp-for="location_start" class="form-control" />
-                <span asp-validation-for="location_start" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="location_end" class="control-label"></label>
-                <input asp-for="location_end" class="form-control" />
-                <span asp-validation-for="location_end" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="full_name_driver" class="control-label"></label>
-                <input asp-for="full_name_driver" class="form-control" />
-                <span asp-validation-for="full_name_driver" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="car_brand_and_model" class="control-label"></label>
-                <input asp-for="car_brand_and_model" class="form-control" />
-                <span asp-validation-for="car_brand_and_model" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="car_type" class="control-label"></label>
-                <select asp-for="car_type" class="form-control"></select>
-                <span asp-validation-for="car_type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="trip_reason" class="control-label"></label>
-                <input asp-for="trip_reason" class="form-control" />
-                <span asp-validation-for="trip_reason" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="full_name_organizer" class="control-label"></label>
-                <input asp-for="full_name_organizer" class="form-control" />
-                <span asp-validation-for="full_name_organizer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                    <div class="col-md-6 py-2">
+                        <label asp-for="date_start" class="form-label"></label>
+                        <input asp-for="date_start" class="form-control" type="date"/>
+                        <span asp-validation-for="date_start" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="date_end" class="form-label"></label>
+                        <input asp-for="date_end" class="form-control" type="date"/>
+                        <span asp-validation-for="date_end" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="location_start" class="form-label"></label>
+                        <input asp-for="location_start" class="form-control"/>
+                        <span asp-validation-for="location_start" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="location_end" class="form-label"></label>
+                        <input asp-for="location_end" class="form-control"/>
+                        <span asp-validation-for="location_end" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="full_name_driver" class="form-label"></label>
+                        <input asp-for="full_name_driver" class="form-control"/>
+                        <span asp-validation-for="full_name_driver" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="car_brand_and_model" class="form-label"></label>
+                        <input asp-for="car_brand_and_model" class="form-control"/>
+                        <span asp-validation-for="car_brand_and_model" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="car_type" class="form-label"></label>
+                        <select asp-for="car_type" class="form-control"></select>
+                        <span asp-validation-for="car_type" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="trip_reason" class="form-label"></label>
+                        <input asp-for="trip_reason" class="form-control"/>
+                        <span asp-validation-for="trip_reason" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="full_name_organizer" class="form-label"></label>
+                        <input asp-for="full_name_organizer" class="form-control"/>
+                        <span asp-validation-for="full_name_organizer" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary my-2 pr-2">
+                    <i class="ti ti-check"></i> Shrani
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="ti ti-arrow-left"></i> Nazaj
+                </a>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

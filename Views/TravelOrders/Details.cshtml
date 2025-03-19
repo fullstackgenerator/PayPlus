@@ -1,78 +1,68 @@
 @model PayPlus.Models.TravelOrder
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Podrobnosti potnega naloga";
 }
 
-<h1>Details</h1>
+<div class="container d-flex justify-content-center">
+    <div class="card w-50 mt-5">
+        <div class="card-header">
+            <h5>@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.order_date)</strong></td>
+                    <td>@Html.DisplayFor(model => model.order_date)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.date_start)</strong></td>
+                    <td>@Html.DisplayFor(model => model.date_start)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.date_end)</strong></td>
+                    <td>@Html.DisplayFor(model => model.date_end)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.location_start)</strong></td>
+                    <td>@Html.DisplayFor(model => model.location_start)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.location_end)</strong></td>
+                    <td>@Html.DisplayFor(model => model.location_end)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.full_name_driver)</strong></td>
+                    <td>@Html.DisplayFor(model => model.full_name_driver)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.car_brand_and_model)</strong></td>
+                    <td>@Html.DisplayFor(model => model.car_brand_and_model)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.car_type)</strong></td>
+                    <td>@Html.DisplayFor(model => model.car_type)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.trip_reason)</strong></td>
+                    <td>@Html.DisplayFor(model => model.trip_reason)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.full_name_organizer)</strong></td>
+                    <td>@Html.DisplayFor(model => model.full_name_organizer)</td>
+                </tr>
+                </tbody>
+            </table>
 
-<div>
-    <h4>TravelOrder</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.order_date)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.order_date)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.date_start)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.date_start)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.date_end)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.date_end)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.location_start)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.location_start)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.location_end)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.location_end)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.full_name_driver)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.full_name_driver)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.car_brand_and_model)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.car_brand_and_model)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.car_type)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.car_type)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.trip_reason)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.trip_reason)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.full_name_organizer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.full_name_organizer)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.order_id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+            <div class="mt-3">
+                <a asp-action="Edit" asp-route-id="@Model?.order_id" class="btn btn-primary">
+                    <i class="ti ti-pencil"></i> Uredi
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="ti ti-arrow-left"></i> Nazaj
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
