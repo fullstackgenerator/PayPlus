@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PayPlus.Data;
 using PayPlus.Models;
+using QuestPDF.Fluent;
 
-namespace PayPlus.Views_TravelOrder
+namespace PayPlus.Controllers
 {
     public class TravelOrdersController : Controller
     {
@@ -50,8 +46,6 @@ namespace PayPlus.Views_TravelOrder
         }
 
         // POST: TravelOrders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("order_date,date_start,date_end,location_start,location_end,full_name_driver,car_brand_and_model,car_type,trip_reason,full_name_organizer")] TravelOrder travelOrder)
@@ -82,8 +76,6 @@ namespace PayPlus.Views_TravelOrder
         }
 
         // POST: TravelOrders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("order_date,date_start,date_end,location_start,location_end,full_name_driver,car_brand_and_model,car_type,trip_reason,full_name_organizer")] TravelOrder travelOrder)
@@ -149,6 +141,49 @@ namespace PayPlus.Views_TravelOrder
             return RedirectToAction(nameof(Index));
         }
 
+        // Export a travel order to PDF
+        public async Task<IActionResult> ExportToPdf(int id)
+        {
+            var travelOrder = await _context.TravelOrder.FirstOrDefaultAsync(t => t.order_id == id);
+            if (travelOrder == null)
+            {
+                return NotFound();
+            }
+
+            var document = GeneratePdf(travelOrder);
+            var pdfBytes = document.GeneratePdf();
+
+            // Return the PDF file as a response
+            return File(pdfBytes, "application/pdf", $"Potni_nalog_{id}.pdf");
+        }
+
+        // generate PDF document
+        private Document GeneratePdf(TravelOrder travelOrder)
+        {
+            return Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(20);
+                    page.Content().Column(col =>
+                    {
+                        col.Item().Text($"Potni nalog #{travelOrder.order_id}");
+                        col.Item().Text($"Datum dokumenta: {travelOrder.order_date:dd.MM.yyyy}");
+                        col.Item().Text($"Začetek: {travelOrder.date_start:dd.MM.yyyy}");
+                        col.Item().Text($"Zaključek: {travelOrder.date_end:dd.MM.yyyy}");
+                        col.Item().Text($"Začetna lokacija: {travelOrder.location_start}");
+                        col.Item().Text($"Lokacija: {travelOrder.location_end}");
+                        col.Item().Text($"Voznik: {travelOrder.full_name_driver}");
+                        col.Item().Text($"Znamka in model: {travelOrder.car_brand_and_model}");
+                        col.Item().Text($"Vrsta vozila: {travelOrder.car_type}");
+                        col.Item().Text($"Namen: {travelOrder.trip_reason}");
+                        col.Item().Text($"Odobril/a: {travelOrder.full_name_organizer}");
+                    });
+                });
+            });
+        }
+
+        // Check if a travel order exists in the database
         private bool TravelOrderExists(int id)
         {
             return _context.TravelOrder.Any(e => e.order_id == id);
