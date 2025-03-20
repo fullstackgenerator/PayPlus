@@ -157,7 +157,7 @@ namespace PayPlus.Controllers
             return File(pdfBytes, "application/pdf", $"Potni_nalog_{id}.pdf");
         }
 
-        // generate PDF document
+        // Generate PDF document
         private Document GeneratePdf(TravelOrder travelOrder)
         {
             return Document.Create(container =>
@@ -182,8 +182,7 @@ namespace PayPlus.Controllers
                 });
             });
         }
-
-        // Check if a travel order exists in the database
+        
         private bool TravelOrderExists(int id)
         {
             return _context.TravelOrder.Any(e => e.order_id == id);
