@@ -1,4 +1,5 @@
 @model IEnumerable<PayPlus.Models.TravelOrder>
+@using PayPlus.Extensions
 
 @{
     ViewData["Title"] = "Seznam potnih nalogov";
@@ -47,7 +48,7 @@
                         <td class="text-left">@item.travelOrder.location_end</td>
                         <td class="text-left">@item.travelOrder.full_name_driver</td>
                         <td class="text-left">@item.travelOrder.car_brand_and_model</td>
-                        <td class="text-left">@item.travelOrder.car_type</td>
+                        <td class="text-left">@item.travelOrder.car_type.GetDisplayName()</td>
                         <td class="text-left">@item.travelOrder.trip_reason</td>
                         <td class="text-left">@item.travelOrder.full_name_organizer</td>
                         <td class="text-left">
@@ -67,9 +68,9 @@
                                    asp-route-id="@item.travelOrder.order_id">
                                     <i class="ti ti-trash"></i> Izbriši
                                 </a>
-                                <a class="btn btn-outline-secondary btn-sm mx-1" asp-action="Delete"
+                                <a class="btn btn-outline-secondary btn-sm mx-1" asp-action="ExportToPdf"
                                    asp-route-id="@item.travelOrder.order_id">
-                                    <i class="ti ti-export"></i> Izvozi
+                                    <i class="ti ti-export"></i> Izvozi PDF
                                 </a>
                             </div>
                         </td>
