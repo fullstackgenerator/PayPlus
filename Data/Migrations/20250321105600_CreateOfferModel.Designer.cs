@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayPlus.Data;
 
@@ -10,9 +11,11 @@ using PayPlus.Data;
 namespace PayPlus.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250321105600_CreateOfferModel")]
+    partial class CreateOfferModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
@@ -213,30 +216,6 @@ namespace PayPlus.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PayPlus.Models.Offer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("OfferDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("PartnerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PartnerId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("Offer");
-                });
-
             modelBuilder.Entity("PayPlus.Models.Partner", b =>
                 {
                     b.Property<int>("Id")
@@ -275,7 +254,7 @@ namespace PayPlus.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Partner");
+                    b.ToTable("Partners");
                 });
 
             modelBuilder.Entity("PayPlus.Models.Service", b =>
@@ -398,25 +377,6 @@ namespace PayPlus.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("PayPlus.Models.Offer", b =>
-                {
-                    b.HasOne("PayPlus.Models.Partner", "Partner")
-                        .WithMany()
-                        .HasForeignKey("PartnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PayPlus.Models.Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Partner");
-
-                    b.Navigation("Service");
                 });
 #pragma warning restore 612, 618
         }

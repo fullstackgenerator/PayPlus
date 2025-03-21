@@ -13,10 +13,12 @@ public class ApplicationDbContext : IdentityDbContext
     
     public DbSet<Partner> Partners { get; set; }
     public DbSet<Service> Services { get; set; }
+    public DbSet<TravelOrder> TravelOrders { get; set; }
     
 
 public DbSet<PayPlus.Models.Service> Service { get; set; } = default!;
 
+public DbSet<PayPlus.Models.Partner> Partner { get; set; } = default!;
 public DbSet<PayPlus.Models.TravelOrder> TravelOrder { get; set; } = default!;
 }
 
