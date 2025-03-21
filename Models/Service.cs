@@ -9,7 +9,7 @@ public class Service
     [MaxLength(150)]
     public required string ServiceName { get; set; }
 
-    [Display(Name = "Description:")]
+    [Display(Name = "Description")]
     [MaxLength(600)]
     public required string ServiceDescription { get; set; }
 
