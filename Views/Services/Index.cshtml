@@ -1,16 +1,16 @@
 @model IEnumerable<PayPlus.Models.Service>
 
 @{
-    ViewData["Title"] = "Seznam storitev";
+    ViewData["Title"] = "Services";
 }
 <div class="card mt-3">
     <div class="card-body">
         <div class="container d-flex justify-content-left">
             <a class="btn button-dodaj-storitev-partnerja" asp-action="Create">
-                <i class="ti ti-plus"></i> Dodaj storitev
+                <i class="ti ti-plus"></i> Add Service
             </a>
 
-            <input type="search" class="form-control w-25 ms-3" placeholder="Poišči storitev..." aria-label="Search">
+            <input type="search" class="form-control w-25 ms-3" placeholder="Search services..." aria-label="Search">
         </div>
     </div>
 </div>
@@ -36,15 +36,15 @@
                     <td class="text-center">
                         <div class="d-flex justify-content-center">
                             <a class="btn btn-outline-success btn-sm mx-1" asp-action="Edit" asp-route-id="@item.Id">
-                                <i class="ti ti-edit"></i> Uredi
+                                <i class="ti ti-edit"></i> Edit
                             </a>
 
                             <a class="btn btn-outline-primary btn-sm mx-1" asp-action="Details" asp-route-id="@item.Id">
-                                <i class="ti ti-eye"></i> Podrobnosti
+                                <i class="ti ti-eye"></i> Details
                             </a>
 
                             <a class="btn btn-outline-danger btn-sm mx-1" asp-action="Delete" asp-route-id="@item.Id">
-                                <i class="ti ti-trash"></i> Izbriši
+                                <i class="ti ti-trash"></i> Delete
                             </a>
                         </div>
                     </td>

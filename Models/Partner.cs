@@ -5,28 +5,28 @@ namespace PayPlus.Models
     {
         public required int Id { get; set; }
         
-        [Display(Name = "Naziv")]
+        [Display(Name = "Name")]
         public required string Name { get; set; }
         
-        [Display(Name = "Davčna številka")]
+        [Display(Name = "VAT Number")]
         public required int VAT_number { get; set; }
         
-        [Display(Name = "Naslov")]
+        [Display(Name = "Address")]
         public required string Address { get; set; }
         
-        [Display(Name = "Poštna številka")]
+        [Display(Name = "Postal Code")]
         public required int Postal_code { get; set; }
         
-        [Display(Name = "Kraj")]
+        [Display(Name = "City")]
         public required string City { get; set; }
         
-        [Display(Name = "Država")]
+        [Display(Name = "Country")]
         public required string Country { get; set; }
         
-        [Display(Name = "E-naslov")]
+        [Display(Name = "E-mail")]
         public required string Email { get; set; }
         
-        [Display(Name = "Telefon")]
+        [Display(Name = "Phone")]
         public required string Phone { get; set; }
     }
 }

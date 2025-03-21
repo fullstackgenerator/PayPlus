@@ -5,10 +5,10 @@ namespace PayPlus.Models;
 
 public enum CarType
 {
-    [Display(Name = "Lastno vozilo")]
+    [Display(Name = "Private vehicle")]
     PrivateCar,
 
-    [Display(Name = "Službeno vozilo")]
+    [Display(Name = "Company vehicle")]
     CompanyCar
     
 }
@@ -16,39 +16,39 @@ public enum CarType
 public class TravelOrder
 {
     [Key]
-    [DisplayName("Številka naloga:")]
+    [DisplayName("Order ID:")]
     public required int order_id { get; set; }
 
-    [DisplayName("Datum dokumenta:")]
+    [DisplayName("Document Date:")]
     [DataType(DataType.Date)]
     public required DateTime order_date { get; set; }
 
-    [DisplayName("Datum začetka:")]
+    [DisplayName("Start date:")]
     [DataType(DataType.Date)]
     public required DateTime date_start { get; set; }
 
-    [DisplayName("Datum zaključka:")]
+    [DisplayName("End date:")]
     [DataType(DataType.Date)]
     public required DateTime date_end { get; set; }
 
-    [DisplayName("Začetna lokacija:")]
+    [DisplayName("Start location:")]
     public required string location_start { get; set; }
     
-    [DisplayName("V/na:")]
+    [DisplayName("Destination:")]
     public required string location_end { get; set; }
 
-    [DisplayName("Ime voznika:")]
+    [DisplayName("Driver's full name:")]
     public required string full_name_driver { get; set; }
 
-    [DisplayName("Znamka in model vozila:")]
+    [DisplayName("Vehicle Brand and Model:")]
     public required string car_brand_and_model { get; set; }
 
-    [DisplayName("Vrsta vozila:")]
+    [DisplayName("Vehicle type:")]
     public required CarType car_type { get; set; }
     
-    [DisplayName("Namen:")]
+    [DisplayName("Purpose:")]
     public required string trip_reason { get; set; }
     
-    [DisplayName("Odobril/a:")]
+    [DisplayName("Confirmed by:")]
     public required string full_name_organizer { get; set; }
 }

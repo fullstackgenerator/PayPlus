@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="sl">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -23,22 +23,22 @@
             </button>
             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                 <a asp-area="" asp-controller="Services" asp-action="Index" class="btn btn-outline-secondary nav-button text-white">
-                    Storitve
+                    Services
                 </a>
                 <a asp-area="" asp-controller="Partners" asp-action="Index" class="btn btn-outline-secondary nav-button text-white">
-                    Partnerji
+                    Partners
                 </a>
 
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-secondary nav-button dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dokumenti
+                        Documents
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Ponudbe</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Računi</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Potni nalogi</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Poročila in izvoz</a></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Koledar</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Services</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Invoices</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="TravelOrders" asp-action="Index">Travel Orders</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Reports and Export</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Partners" asp-action="Index">Calender</a></li>
                     </ul>
                 </div>
             </div>
