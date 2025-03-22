@@ -213,30 +213,6 @@ namespace PayPlus.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PayPlus.Models.Offer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("OfferDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("PartnerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PartnerId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("Offer");
-                });
-
             modelBuilder.Entity("PayPlus.Models.Partner", b =>
                 {
                     b.Property<int>("Id")
@@ -399,25 +375,7 @@ namespace PayPlus.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
-
-            modelBuilder.Entity("PayPlus.Models.Offer", b =>
-                {
-                    b.HasOne("PayPlus.Models.Partner", "Partner")
-                        .WithMany()
-                        .HasForeignKey("PartnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PayPlus.Models.Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Partner");
-
-                    b.Navigation("Service");
-                });
+            
 #pragma warning restore 612, 618
         }
     }
