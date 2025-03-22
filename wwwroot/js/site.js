@@ -16,3 +16,26 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     calendar.render();
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Calculate total price when services are selected
+    $('select[name="ServiceIds"]').change(function () {
+        var totalPrice = 0;
+        $('select[name="ServiceIds"] option:selected').each(function () {
+            var serviceText = $(this).text();
+            var servicePrice = parseFloat(serviceText.split(' - ')[1].replace('€', '').trim());
+            if (!isNaN(servicePrice)) {
+                totalPrice += servicePrice;
+            }
+        });
+        $('#TotalPrice').val(totalPrice.toFixed(2));
+    });
+
+    // Log form submission
+    $('#create-offer-form').on('submit', function (e) {
+        console.log('Form submitted');
+        console.log('PartnerId:', $('#PartnerId').val());
+        console.log('ServiceIds:', $('select[name="ServiceIds"]').val());
+        console.log('TotalPrice:', $('#TotalPrice').val());
+    });
+});

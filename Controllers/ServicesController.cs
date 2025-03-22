@@ -17,7 +17,7 @@ namespace PayPlus.Controllers
         // GET: Services
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Service.ToListAsync());
+            return View(await _context.Services.ToListAsync());
         }
 
         // GET: Services/Details/5

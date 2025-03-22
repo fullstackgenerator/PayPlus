@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayPlus.Data;
 
@@ -10,9 +11,11 @@ using PayPlus.Data;
 namespace PayPlus.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250322151031_CreateOffersTable")]
+    partial class CreateOffersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
@@ -213,21 +216,6 @@ namespace PayPlus.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OfferService", b =>
-                {
-                    b.Property<int>("OffersId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ServicesId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("OffersId", "ServicesId");
-
-                    b.HasIndex("ServicesId");
-
-                    b.ToTable("OfferServices", (string)null);
-                });
-
             modelBuilder.Entity("PayPlus.Models.Offer", b =>
                 {
                     b.Property<int>("Id")
@@ -297,6 +285,9 @@ namespace PayPlus.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("OfferId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
@@ -311,6 +302,8 @@ namespace PayPlus.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OfferId");
 
                     b.ToTable("Service");
                 });
@@ -413,21 +406,6 @@ namespace PayPlus.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OfferService", b =>
-                {
-                    b.HasOne("PayPlus.Models.Offer", null)
-                        .WithMany()
-                        .HasForeignKey("OffersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PayPlus.Models.Service", null)
-                        .WithMany()
-                        .HasForeignKey("ServicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("PayPlus.Models.Offer", b =>
                 {
                     b.HasOne("PayPlus.Models.Partner", "Partner")
@@ -437,6 +415,18 @@ namespace PayPlus.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Partner");
+                });
+
+            modelBuilder.Entity("PayPlus.Models.Service", b =>
+                {
+                    b.HasOne("PayPlus.Models.Offer", null)
+                        .WithMany("Services")
+                        .HasForeignKey("OfferId");
+                });
+
+            modelBuilder.Entity("PayPlus.Models.Offer", b =>
+                {
+                    b.Navigation("Services");
                 });
 #pragma warning restore 612, 618
         }
