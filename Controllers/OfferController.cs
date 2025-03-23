@@ -34,10 +34,11 @@ namespace PayPlus.Controllers
             }
 
             var offer = await _context.Offers
-                .Include(o => o.Partner)
+                .Include(o => o.Partner) // Include the Partner
+                .Include(o => o.Services) // Include the Services
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (offer == null || offer.Partner == null)
+            if (offer == null)
             {
                 return NotFound();
             }
