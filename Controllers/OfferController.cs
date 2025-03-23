@@ -34,8 +34,8 @@ namespace PayPlus.Controllers
             }
 
             var offer = await _context.Offers
-                .Include(o => o.Partner) // Include the Partner
-                .Include(o => o.Services) // Include the Services
+                .Include(o => o.Partner)
+                .Include(o => o.Services)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (offer == null)
@@ -167,6 +167,7 @@ namespace PayPlus.Controllers
 
             var offer = await _context.Offers
                 .Include(o => o.Partner)
+                .Include(o => o.Services)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (offer == null)
@@ -176,6 +177,7 @@ namespace PayPlus.Controllers
 
             return View(offer);
         }
+        
 
         // POST: Offer/Delete/5
         [HttpPost, ActionName("Delete")]
