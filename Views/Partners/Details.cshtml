@@ -51,7 +51,7 @@
                 <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-primary btn-sm mx-1">
                     <i class="ti ti-pencil"></i> Edit
                 </a>
-                <a asp-action="Delete" class="btn btn-outline-danger btn-sm mx-1">
+                <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-outline-danger btn-sm mx-1">
                     <i class="ti ti-trash"></i> Delete
                 </a>
                 <a asp-action="Index" class="btn btn-outline-secondary btn-sm mx-1">
