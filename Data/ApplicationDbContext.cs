@@ -20,11 +20,17 @@ public class ApplicationDbContext : IdentityDbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Configure the many-to-many relationship between Offer and Service
+        // many-to-many relationship between Offer and Service
         modelBuilder.Entity<Offer>()
             .HasMany(o => o.Services)
             .WithMany(s => s.Offers)
             .UsingEntity(j => j.ToTable("OfferServices"));
+
+        // many-to-many relationship between Invoice and Service
+        modelBuilder.Entity<Invoice>()
+            .HasMany(i => i.Services)
+            .WithMany(s => s.Invoices)
+            .UsingEntity(j => j.ToTable("InvoiceServices"));
     }
     
 public DbSet<PayPlus.Models.Service> Service { get; set; } = default!;

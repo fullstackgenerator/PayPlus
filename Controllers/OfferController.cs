@@ -198,5 +198,10 @@ namespace PayPlus.Controllers
         {
             return _context.Offers.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> ToInvoice(int id)
+        {
+            return RedirectToAction("CreateFromOffer", "Invoice", new { id = id });
+        }
     }
 }

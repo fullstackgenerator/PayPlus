@@ -1,4 +1,4 @@
-@model IEnumerable<PayPlus.Models.Offer>
+@model IEnumerable<PayPlus.Models.Offer> 
 @using PayPlus.Extensions
 
 @{
@@ -36,12 +36,18 @@
                     <td class="text-left">@item.offer.Partner?.Name</td>
                     <td class="text-center">@string.Join(", ", item.offer.Services.Select(s => s.ServiceName))</td>
                     <td class="text-center">@item.offer.TotalPrice.ToString("C")</td>
-                    <td class="text-center">@item.offer.OfferDate.ToShortDateString()</td>
+                    <td class="text-center">@item.offer.Date.ToShortDateString()</td>
                     <td class="text-center">
                         <div class="d-flex justify-content-center">
                             <a class="btn btn-outline-primary btn-sm mx-1" asp-action="Details"
                                asp-route-id="@item.offer.Id">
                                 <i class="ti ti-eye"></i> Details
+                            </a>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-outline-success btn-sm mx-1" asp-action="ToInvoice"
+                               asp-route-id="@item.offer.Id">
+                                <i class="ti ti-file-invoice"></i> Create Invoice
                             </a>
                         </div>
                         <div class="d-flex justify-content-center">

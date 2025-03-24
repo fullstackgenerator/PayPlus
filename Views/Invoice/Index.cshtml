@@ -1,55 +1,53 @@
 @model IEnumerable<PayPlus.Models.Invoice>
+@using PayPlus.Extensions
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Invoices";
 }
 
-<!DOCTYPE html>
+<div class="card mt-3">
+    <div class="card-body">
+        <div class="container d-flex justify-content-left">
+           <input type="search" class="form-control w-25 ms-3" placeholder="Search invoices..." aria-label="Search">
+        </div>
+    </div>
+</div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Partner)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OfferDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Partner.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OfferDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+<div class="card mt-3">
+    <div class="card-body">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th class="text-left">Partner</th>
+                <th class="text-center">Services</th>
+                <th class="text-center">Total Price</th>
+                <th class="text-center">Invoice Date</th>
+                <th class="text-center">Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Select((invoice, index) => new { invoice, index }))
+            {
+                <tr>
+                    <td class="text-left">@item.invoice.Partner?.Name</td>
+                    <td class="text-center">@string.Join(", ", item.invoice.Services.Select(s => s.ServiceName))</td>
+                    <td class="text-center">@item.invoice.TotalPrice.ToString("C")</td>
+                    <td class="text-center">@item.invoice.Date.ToShortDateString()</td>
+                    <td class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-outline-primary btn-sm mx-1" asp-action="Details"
+                               asp-route-id="@item.invoice.Id">
+                                <i class="ti ti-eye"></i> Details
+                            </a>
+                            <a class="btn btn-outline-secondary btn-sm mx-1" asp-action="ExportToPdf"
+                               asp-route-id="@item.invoice.Id">
+                                <i class="ti ti-export"></i> Export
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

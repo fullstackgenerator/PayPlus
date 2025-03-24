@@ -16,7 +16,7 @@ namespace PayPlus.Models
         public List<Service> Services { get; set; } = new List<Service>();
 
         [Display(Name = "Offer Date")]
-        public DateTime OfferDate { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; } = DateTime.Now;
 
         [Display(Name = "Total Price")]
         public decimal TotalPrice { get; set; }

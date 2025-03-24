@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayPlus.Data;
 
@@ -10,27 +11,14 @@ using PayPlus.Data;
 namespace PayPlus.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250324160006_CreateInvoicesTable")]
+    partial class CreateInvoicesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
-
-            modelBuilder.Entity("InvoiceService", b =>
-                {
-                    b.Property<int>("InvoicesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ServicesId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("InvoicesId", "ServicesId");
-
-                    b.HasIndex("ServicesId");
-
-                    b.ToTable("InvoiceServices", (string)null);
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -249,7 +237,7 @@ namespace PayPlus.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("OfferDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("PartnerId")
@@ -271,7 +259,7 @@ namespace PayPlus.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("OfferDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("PartnerId")
@@ -334,6 +322,9 @@ namespace PayPlus.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("InvoiceId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
@@ -348,6 +339,8 @@ namespace PayPlus.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
 
                     b.ToTable("Service");
                 });
@@ -397,21 +390,6 @@ namespace PayPlus.Data.Migrations
                     b.HasKey("order_id");
 
                     b.ToTable("TravelOrder");
-                });
-
-            modelBuilder.Entity("InvoiceService", b =>
-                {
-                    b.HasOne("PayPlus.Models.Invoice", null)
-                        .WithMany()
-                        .HasForeignKey("InvoicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PayPlus.Models.Service", null)
-                        .WithMany()
-                        .HasForeignKey("ServicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -500,6 +478,18 @@ namespace PayPlus.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Partner");
+                });
+
+            modelBuilder.Entity("PayPlus.Models.Service", b =>
+                {
+                    b.HasOne("PayPlus.Models.Invoice", null)
+                        .WithMany("Services")
+                        .HasForeignKey("InvoiceId");
+                });
+
+            modelBuilder.Entity("PayPlus.Models.Invoice", b =>
+                {
+                    b.Navigation("Services");
                 });
 #pragma warning restore 612, 618
         }

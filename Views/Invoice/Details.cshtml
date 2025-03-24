@@ -1,17 +1,8 @@
 @model PayPlus.Models.Invoice
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Invoice Details";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
 
 <div>
     <h4>Invoice</h4>
@@ -24,10 +15,10 @@
             @Html.DisplayFor(model => model.Partner.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfferDate)
+            @Html.DisplayNameFor(model => model.Date)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OfferDate)
+            @Html.DisplayFor(model => model.Date)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TotalPrice)
@@ -41,5 +32,3 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
-</body>
-</html>

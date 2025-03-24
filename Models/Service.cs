@@ -18,5 +18,7 @@ namespace PayPlus.Models
         public decimal Price { get; set; }
 
         public List<Offer> Offers { get; set; } = new List<Offer>();
+        
+        public List<Invoice> Invoices { get; set; } = new List<Invoice>();
     }
 }

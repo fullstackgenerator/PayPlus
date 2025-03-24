@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,8 +18,11 @@ namespace PayPlus.Controllers
         // GET: Invoice
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Invoice.Include(i => i.Partner);
-            return View(await applicationDbContext.ToListAsync());
+            var invoices = await _context.Invoice
+                .Include(i => i.Partner)
+                .Include(i => i.Services) // Include services
+                .ToListAsync();
+            return View(invoices);
         }
 
         // GET: Invoice/Details/5
@@ -36,7 +35,9 @@ namespace PayPlus.Controllers
 
             var invoice = await _context.Invoice
                 .Include(i => i.Partner)
+                .Include(i => i.Services) // Include services
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (invoice == null)
             {
                 return NotFound();
@@ -155,7 +156,40 @@ namespace PayPlus.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        
+        public async Task<IActionResult> CreateFromOffer(int id)
+        {
+            var offer = await _context.Offers
+                .Include(o => o.Partner)
+                .Include(o => o.Services) // Make sure to include services
+                .FirstOrDefaultAsync(o => o.Id == id);
 
+            if (offer == null)
+            {
+                return NotFound();
+            }
+
+            // Create invoice from offer
+            var invoice = new Invoice
+            {
+                PartnerId = offer.PartnerId,
+                Partner = offer.Partner,
+                Date = offer.Date,
+                TotalPrice = offer.TotalPrice
+            };
+
+            // Add the services to the invoice
+            foreach (var service in offer.Services)
+            {
+                invoice.Services.Add(service);
+            }
+
+            _context.Invoice.Add(invoice);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        
         private bool InvoiceExists(int id)
         {
             return _context.Invoice.Any(e => e.Id == id);
