@@ -33,5 +33,7 @@ public DbSet<PayPlus.Models.Partner> Partner { get; set; } = default!;
 public DbSet<PayPlus.Models.TravelOrder> TravelOrder { get; set; } = default!;
 
 public DbSet<PayPlus.Models.Offer> Offer { get; set; } = default!;
+
+public DbSet<PayPlus.Models.Invoice> Invoice { get; set; } = default!;
 }
 
