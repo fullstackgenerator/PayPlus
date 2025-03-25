@@ -121,7 +121,6 @@ namespace PayPlus.Controllers
             }
             
             ViewBag.PartnerId = new SelectList(_context.Partners, "Id", "Name", offer.PartnerId);
-
             return View(offer);
         }
 

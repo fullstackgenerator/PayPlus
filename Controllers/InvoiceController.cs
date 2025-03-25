@@ -83,7 +83,8 @@ namespace PayPlus.Controllers
             {
                 return NotFound();
             }
-            ViewData["PartnerId"] = new SelectList(_context.Partners, "Id", "Id", invoice.PartnerId);
+
+            ViewBag.PartnerId = new SelectList(_context.Partners, "Id", "Name", invoice.PartnerId);
             return View(invoice);
         }
 
