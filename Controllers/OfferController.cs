@@ -197,7 +197,11 @@ namespace PayPlus.Controllers
         // Export a travel order to PDF
         public async Task<IActionResult> ExportToPdf(int id)
         {
-            var offer = await _context.Offer.FirstOrDefaultAsync(t => t.Id == id);
+            var offer = await _context.Offer
+                .Include(o => o.Partner)  // Include Partner
+                .Include(o => o.Services) // Include Services
+                .FirstOrDefaultAsync(t => t.Id == id);
+    
             if (offer == null)
             {
                 return NotFound();
@@ -206,7 +210,6 @@ namespace PayPlus.Controllers
             var document = GeneratePdf(offer);
             var pdfBytes = document.GeneratePdf();
 
-            // Return the PDF file as a response
             return File(pdfBytes, "application/pdf", $"Offer_{id}.pdf");
         }
 
@@ -220,11 +223,24 @@ namespace PayPlus.Controllers
                     page.Margin(20);
                     page.Content().Column(col =>
                     {
-                        col.Item().Text($"Offer ID #{offer.Id}");
-                        col.Item().Text($"Partner: {offer.Partner}");
-                        col.Item().Text($"Services: {offer.Services}");
+                        col.Item().Text($"Offer ID #{offer.Id}").Bold().FontSize(16);
+                        col.Item().PaddingVertical(10);
+                
+                        // Partner information
+                        col.Item().Text($"Partner: {offer.Partner?.Name ?? "Not specified"}");
+                
+                        // Services list
+                        col.Item().Text("Services:");
+                        foreach (var service in offer.Services)
+                        {
+                            col.Item().Text($"- {service.ServiceName}: {service.Price:C}");
+                        }
+                
+                        col.Item().PaddingVertical(10);
+                
+                        // Dates and totals
                         col.Item().Text($"Offer date: {offer.Date:dd.MM.yyyy}");
-                        col.Item().Text($"Total price: {offer.TotalPrice}");
+                        col.Item().Text($"Total price: {offer.TotalPrice:C}").Bold();
                     });
                 });
             });
