@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PayPlus.Data;
 using PayPlus.Models;
+using QuestPDF.Fluent;
 
 namespace PayPlus.Controllers
 {
@@ -193,11 +194,47 @@ namespace PayPlus.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Export a travel order to PDF
+        public async Task<IActionResult> ExportToPdf(int id)
+        {
+            var offer = await _context.Offer.FirstOrDefaultAsync(t => t.Id == id);
+            if (offer == null)
+            {
+                return NotFound();
+            }
+
+            var document = GeneratePdf(offer);
+            var pdfBytes = document.GeneratePdf();
+
+            // Return the PDF file as a response
+            return File(pdfBytes, "application/pdf", $"Offer_{id}.pdf");
+        }
+
+        // Generate PDF document
+        private Document GeneratePdf(Offer offer)
+        {
+            return Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(20);
+                    page.Content().Column(col =>
+                    {
+                        col.Item().Text($"Offer ID #{offer.Id}");
+                        col.Item().Text($"Partner: {offer.Partner}");
+                        col.Item().Text($"Services: {offer.Services}");
+                        col.Item().Text($"Offer date: {offer.Date:dd.MM.yyyy}");
+                        col.Item().Text($"Total price: {offer.TotalPrice}");
+                    });
+                });
+            });
+        }
+        
         private bool OfferExists(int id)
         {
             return _context.Offers.Any(e => e.Id == id);
         }
-
+        
         public async Task<IActionResult> ToInvoice(int id)
         {
             return RedirectToAction("CreateFromOffer", "Invoice", new { id = id });

@@ -154,7 +154,7 @@ namespace PayPlus.Controllers
             var pdfBytes = document.GeneratePdf();
 
             // Return the PDF file as a response
-            return File(pdfBytes, "application/pdf", $"Potni_nalog_{id}.pdf");
+            return File(pdfBytes, "application/pdf", $"Travel_order_{id}.pdf");
         }
 
         // Generate PDF document

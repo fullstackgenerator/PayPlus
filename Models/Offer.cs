@@ -4,7 +4,10 @@ namespace PayPlus.Models
 {
     public class Offer
     {
-        public int Id { get; set; }
+
+        [Key]
+        [Display(Name = "Offer ID:")]
+        public required int Id { get; set; }
 
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
@@ -16,6 +19,7 @@ namespace PayPlus.Models
         public List<Service> Services { get; set; } = new List<Service>();
 
         [Display(Name = "Offer Date")]
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; } = DateTime.Now;
 
         [Display(Name = "Total Price")]
