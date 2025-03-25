@@ -4,35 +4,43 @@
     ViewData["Title"] = "Edit Invoice";
 }
 
-<h4>Invoice</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="PartnerId" class="control-label"></label>
-                <select asp-for="PartnerId" class="form-control" asp-items="ViewBag.PartnerId"></select>
-                <span asp-validation-for="PartnerId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalPrice" class="control-label"></label>
-                <input asp-for="TotalPrice" class="form-control" />
-                <span asp-validation-for="TotalPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<div class="container d-flex justify-content-center">
+    <div class="card w-50 mt-5">
+        <div class="card-header">
+            <h5>@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="POST">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id"/>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+                <div class="row">
+                    <div class="col-md-6 py-2">
+                        <label asp-for="PartnerId" class="form-label"></label>
+                        <select asp-for="PartnerId" class="form-control" asp-items="ViewBag.PartnerId"></select>
+                        <span asp-validation-for="PartnerId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="Date" class="form-label"></label>
+                        <input asp-for="Date" class="form-control" required/>
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 py-2">
+                        <label asp-for="TotalPrice" class="form-label"></label>
+                        <input asp-for="TotalPrice" class="form-control" required/>
+                        <span asp-validation-for="TotalPrice" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary btn-sm mx-1 my-2 pr-2">
+                    <i class="ti ti-check"></i> Save
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm mx-1">
+                    <i class="ti ti-arrow-left"></i> Back
+                </a>
+            </form>
+        </div>
+    </div>
 </div>
