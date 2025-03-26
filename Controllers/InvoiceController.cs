@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PayPlus.Data;
 using PayPlus.Models;
+using QuestPDF.Fluent;
 
 namespace PayPlus.Controllers
 {
@@ -189,6 +190,57 @@ namespace PayPlus.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+        
+        public async Task<IActionResult> ExportToPdf(int id)
+        {
+            var invoice = await _context.Invoice
+                .Include(o => o.Partner)  // Include Partner
+                .Include(o => o.Services) // Include Services
+                .FirstOrDefaultAsync(t => t.Id == id);
+    
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+
+            var document = GeneratePdf(invoice);
+            var pdfBytes = document.GeneratePdf();
+
+            return File(pdfBytes, "application/pdf", $"Invoice_{id}.pdf");
+        }
+
+        // Generate PDF document
+        private Document GeneratePdf(Invoice invoice)
+        {
+            return Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(20);
+                    page.Content().Column(col =>
+                    {
+                        col.Item().Text($"Invoice number #{invoice.Id}").Bold().FontSize(16);
+                        col.Item().PaddingVertical(10);
+                
+                        // Partner information
+                        col.Item().Text($"Partner: {invoice.Partner?.Name ?? "Not specified"}");
+                
+                        // Services list
+                        col.Item().Text("Services:");
+                        foreach (var service in invoice.Services)
+                        {
+                            col.Item().Text($"- {service.ServiceName}: {service.Price:C}");
+                        }
+                
+                        col.Item().PaddingVertical(10);
+                
+                        // Dates and totals
+                        col.Item().Text($"Invoice date: {invoice.Date:dd.MM.yyyy}");
+                        col.Item().Text($"Total price: {invoice.TotalPrice:C}").Bold();
+                    });
+                });
+            });
         }
         
         private bool InvoiceExists(int id)

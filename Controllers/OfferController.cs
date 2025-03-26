@@ -223,7 +223,7 @@ namespace PayPlus.Controllers
                     page.Margin(20);
                     page.Content().Column(col =>
                     {
-                        col.Item().Text($"Offer ID #{offer.Id}").Bold().FontSize(16);
+                        col.Item().Text($"Offer number #{offer.Id}").Bold().FontSize(16);
                         col.Item().PaddingVertical(10);
                 
                         // Partner information

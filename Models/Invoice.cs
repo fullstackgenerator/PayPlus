@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Invoice
 {
+    [Key]
+    [Display(Name = "Invoice ID:")]
     public int Id { get; set; }
 
     [Display(Name = "Partner")]
