@@ -38,6 +38,9 @@
                 <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-outline-danger btn-sm mx-1">
                     <i class="ti ti-trash"></i> Delete
                 </a>
+                <a asp-action="ToInvoice" asp-route-id="@Model?.Id" class="btn btn-outline-success btn-sm mx-1">
+                    <i class="ti ti-file-invoice"></i> Create Invoice
+                </a>
                 <a asp-action="Index" class="btn btn-outline-secondary btn-sm mx-1">
                     <i class="ti ti-arrow-left"></i> Back
                 </a>
