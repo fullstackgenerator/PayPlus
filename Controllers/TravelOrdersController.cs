@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PayPlus.Data;
+using PayPlus.Extensions;
 using PayPlus.Models;
 using QuestPDF.Fluent;
 
@@ -167,17 +168,19 @@ namespace PayPlus.Controllers
                     page.Margin(20);
                     page.Content().Column(col =>
                     {
-                        col.Item().Text($"Potni nalog #{travelOrder.order_id}");
-                        col.Item().Text($"Datum dokumenta: {travelOrder.order_date:dd.MM.yyyy}");
-                        col.Item().Text($"Začetek: {travelOrder.date_start:dd.MM.yyyy}");
-                        col.Item().Text($"Zaključek: {travelOrder.date_end:dd.MM.yyyy}");
-                        col.Item().Text($"Začetna lokacija: {travelOrder.location_start}");
-                        col.Item().Text($"Lokacija: {travelOrder.location_end}");
-                        col.Item().Text($"Voznik: {travelOrder.full_name_driver}");
-                        col.Item().Text($"Znamka in model: {travelOrder.car_brand_and_model}");
-                        col.Item().Text($"Vrsta vozila: {travelOrder.car_type}");
-                        col.Item().Text($"Namen: {travelOrder.trip_reason}");
-                        col.Item().Text($"Odobril/a: {travelOrder.full_name_organizer}");
+                        col.Item().Text($"Travel order number #{travelOrder.order_id}").Bold().FontSize(16);
+                        col.Item().Text($"Document date: {travelOrder.order_date:dd.MM.yyyy}");
+                        col.Item().PaddingVertical(10);
+                        
+                        col.Item().Text($"Start date: {travelOrder.date_start:dd.MM.yyyy}");
+                        col.Item().Text($"End date: {travelOrder.date_end:dd.MM.yyyy}");
+                        col.Item().Text($"Start location: {travelOrder.location_start}");
+                        col.Item().Text($"Location: {travelOrder.location_end}");
+                        col.Item().Text($"Name of driver: {travelOrder.full_name_driver}");
+                        col.Item().Text($"Vehicle brand and model: {travelOrder.car_brand_and_model}");
+                        col.Item().Text($"Type of vehicle: {travelOrder.car_type.GetDisplayName()}");
+                        col.Item().Text($"Reason for travel: {travelOrder.trip_reason}");
+                        col.Item().Text($"Confirmed by: {travelOrder.full_name_organizer}");
                     });
                 });
             });
