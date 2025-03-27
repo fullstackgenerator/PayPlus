@@ -39,3 +39,14 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('TotalPrice:', $('#TotalPrice').val());
     });
 });
+
+// Client-side validation for date range
+document.querySelector('form').addEventListener('submit', function(e) {
+    const startDate = new Date(document.getElementById('StartDate').value);
+    const endDate = new Date(document.getElementById('EndDate').value);
+
+    if (startDate && endDate && endDate < startDate) {
+        e.preventDefault();
+        alert('End date must be after start date');
+    }
+});
