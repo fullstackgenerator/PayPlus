@@ -29,7 +29,14 @@
                 </select>
             </div>
             <div class="col-md-3 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary">Filter</button>
+                <button type="submit" class="btn btn-outline-primary mx-2">Filter</button>
+                <a asp-action="ExportReportToPdf"
+                   asp-route-startDate="@Model.StartDate.ToString("yyyy-MM-dd")"
+                   asp-route-endDate="@Model.EndDate.ToString("yyyy-MM-dd")"
+                   asp-route-selectedPartnerId="@Model.SelectedPartnerId"
+                   class="btn btn-outline-secondary">
+                    <i class="ti ti-file-type-pdf"></i> Export
+                </a>
             </div>
         </form>
     </div>

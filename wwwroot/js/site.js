@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Client-side validation for date range
-document.querySelector('form').addEventListener('submit', function(e) {
+document.querySelector('form').addEventListener('submit', function (e) {
     const startDate = new Date(document.getElementById('StartDate').value);
     const endDate = new Date(document.getElementById('EndDate').value);
 
