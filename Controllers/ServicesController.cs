@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.EntityFrameworkCore;
 using PayPlus.Data;
 using PayPlus.Models;
@@ -24,8 +23,8 @@ namespace PayPlus.Controllers
             if (!string.IsNullOrEmpty(searchService))
             {
                 services = services.Where(s =>
-                    s.ServiceName.Contains(searchService) ||
-                    s.ServiceDescription.Contains(searchService));
+                    s.ServiceName.ToLower().Contains(searchService.ToLower()) ||
+                    s.ServiceDescription.ToLower().Contains(searchService.ToLower()));
             }
             
             return View(await services.ToListAsync());

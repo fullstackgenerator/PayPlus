@@ -15,9 +15,14 @@ namespace PayPlus.Controllers
         }
 
         // GET: Partners
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchPartners)
         {
-            return View(await _context.Partners.ToListAsync());
+            var partners = from p in _context.Partners select p;
+            if (!String.IsNullOrEmpty(searchPartners))
+            {
+                partners = partners.Where(s => s.Name.ToLower().Contains(searchPartners.ToLower()));
+            }
+            return View(await partners.ToListAsync());
         }
 
         // GET: Partners/Details/5
