@@ -110,36 +110,19 @@ namespace PayPlus.Controllers
         }
 
         // GET: TravelOrders/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var travelOrder = await _context.TravelOrder
-                .FirstOrDefaultAsync(m => m.order_id == id);
-            if (travelOrder == null)
-            {
-                return NotFound();
-            }
-
-            return View(travelOrder);
-        }
-
-        // POST: TravelOrders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var travelOrder = await _context.TravelOrder.FindAsync(id);
-            if (travelOrder != null)
-            {
-                _context.TravelOrder.Remove(travelOrder);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+           var travelOrder = await _context.TravelOrder.FindAsync(id);
+           if (travelOrder == null)
+           {
+               return NotFound();
+           }
+           
+           _context.TravelOrder.Remove(travelOrder);
+           await _context.SaveChangesAsync();
+           return RedirectToAction(nameof(Index));
         }
 
         // Export a travel order to PDF

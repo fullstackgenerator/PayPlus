@@ -120,7 +120,7 @@ namespace PayPlus.Controllers
             {
                 return NotFound();
             }
-            
+
             ViewBag.PartnerId = new SelectList(_context.Partners, "Id", "Name", offer.PartnerId);
             return View(offer);
         }
@@ -148,8 +148,10 @@ namespace PayPlus.Controllers
                     {
                         return NotFound();
                     }
+
                     throw;
                 }
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -158,38 +160,17 @@ namespace PayPlus.Controllers
         }
 
         // GET: Offer/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var offer = await _context.Offers
-                .Include(o => o.Partner)
-                .Include(o => o.Services)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
+            var offer = await _context.Offers.FindAsync(id);
             if (offer == null)
             {
                 return NotFound();
             }
 
-            return View(offer);
-        }
-        
-
-        // POST: Offer/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var offer = await _context.Offers.FindAsync(id);
-            if (offer != null)
-            {
-                _context.Offers.Remove(offer);
-            }
-
+            _context.Offers.Remove(offer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -198,10 +179,10 @@ namespace PayPlus.Controllers
         public async Task<IActionResult> ExportToPdf(int id)
         {
             var offer = await _context.Offer
-                .Include(o => o.Partner)  // Include Partner
+                .Include(o => o.Partner) // Include Partner
                 .Include(o => o.Services) // Include Services
                 .FirstOrDefaultAsync(t => t.Id == id);
-    
+
             if (offer == null)
             {
                 return NotFound();
@@ -225,19 +206,19 @@ namespace PayPlus.Controllers
                     {
                         col.Item().Text($"Offer number #{offer.Id}").Bold().FontSize(16);
                         col.Item().PaddingVertical(10);
-                
+
                         // Partner information
                         col.Item().Text($"Partner: {offer.Partner?.Name ?? "Not specified"}");
-                
+
                         // Services list
                         col.Item().Text("Services:");
                         foreach (var service in offer.Services)
                         {
                             col.Item().Text($"- {service.ServiceName}: {service.Price:C}");
                         }
-                
+
                         col.Item().PaddingVertical(10);
-                
+
                         // Dates and totals
                         col.Item().Text($"Offer date: {offer.Date:dd.MM.yyyy}");
                         col.Item().Text($"Total price: {offer.TotalPrice:C}").Bold();
@@ -245,12 +226,12 @@ namespace PayPlus.Controllers
                 });
             });
         }
-        
+
         private bool OfferExists(int id)
         {
             return _context.Offers.Any(e => e.Id == id);
         }
-        
+
         public async Task<IActionResult> ToInvoice(int id)
         {
             return RedirectToAction("CreateFromOffer", "Invoice", new { id = id });

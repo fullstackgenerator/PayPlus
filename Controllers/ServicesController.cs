@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-
 using Microsoft.EntityFrameworkCore;
 using PayPlus.Data;
 using PayPlus.Models;
@@ -58,6 +57,7 @@ namespace PayPlus.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(service);
         }
 
@@ -74,6 +74,7 @@ namespace PayPlus.Controllers
             {
                 return NotFound();
             }
+
             return View(service);
         }
 
@@ -107,40 +108,25 @@ namespace PayPlus.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(service);
         }
 
         // GET: Services/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var service = await _context.Service
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var service = await _context.Service.FindAsync(id);
             if (service == null)
             {
                 return NotFound();
             }
 
-            return View(service);
-        }
-
-        // POST: Services/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var service = await _context.Service.FindAsync(id);
-            if (service != null)
-            {
-                _context.Service.Remove(service);
-            }
-
+            _context.Service.Remove(service);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

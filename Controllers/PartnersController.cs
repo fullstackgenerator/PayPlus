@@ -112,34 +112,17 @@ namespace PayPlus.Controllers
         }
 
         // GET: Partners/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var partner = await _context.Partners
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var partner = await _context.Partners.FindAsync(id);
             if (partner == null)
             {
                 return NotFound();
             }
-
-            return View(partner);
-        }
-
-        // POST: Partners/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var partner = await _context.Partners.FindAsync(id);
-            if (partner != null)
-            {
-                _context.Partners.Remove(partner);
-            }
-
+            
+            _context.Partners.Remove(partner);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

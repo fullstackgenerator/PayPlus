@@ -67,6 +67,7 @@ namespace PayPlus.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["PartnerId"] = new SelectList(_context.Partners, "Id", "Id", invoice.PartnerId);
             return View(invoice);
         }
@@ -119,46 +120,30 @@ namespace PayPlus.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["PartnerId"] = new SelectList(_context.Partners, "Id", "Id", invoice.PartnerId);
             return View(invoice);
         }
 
         // GET: Invoice/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var invoice = await _context.Invoice
-                .Include(i => i.Partner)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var invoice = await _context.Invoice.FindAsync(id);
             if (invoice == null)
             {
                 return NotFound();
             }
 
-            return View(invoice);
-        }
-
-        // POST: Invoice/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var invoice = await _context.Invoice.FindAsync(id);
-            if (invoice != null)
-            {
-                _context.Invoice.Remove(invoice);
-            }
-
+            _context.Invoice.Remove(invoice);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
+
         public async Task<IActionResult> CreateFromOffer(int id)
         {
             var offer = await _context.Offers
@@ -191,14 +176,14 @@ namespace PayPlus.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        
+
         public async Task<IActionResult> ExportToPdf(int id)
         {
             var invoice = await _context.Invoice
-                .Include(o => o.Partner)  // Include Partner
+                .Include(o => o.Partner) // Include Partner
                 .Include(o => o.Services) // Include Services
                 .FirstOrDefaultAsync(t => t.Id == id);
-    
+
             if (invoice == null)
             {
                 return NotFound();
@@ -222,19 +207,19 @@ namespace PayPlus.Controllers
                     {
                         col.Item().Text($"Invoice number #{invoice.Id}").Bold().FontSize(16);
                         col.Item().PaddingVertical(10);
-                
+
                         // Partner information
                         col.Item().Text($"Partner: {invoice.Partner?.Name ?? "Not specified"}");
-                
+
                         // Services list
                         col.Item().Text("Services:");
                         foreach (var service in invoice.Services)
                         {
                             col.Item().Text($"- {service.ServiceName}: {service.Price:C}");
                         }
-                
+
                         col.Item().PaddingVertical(10);
-                
+
                         // Dates and totals
                         col.Item().Text($"Invoice date: {invoice.Date:dd.MM.yyyy}");
                         col.Item().Text($"Total price: {invoice.TotalPrice:C}").Bold();
@@ -242,7 +227,7 @@ namespace PayPlus.Controllers
                 });
             });
         }
-        
+
         private bool InvoiceExists(int id)
         {
             return _context.Invoice.Any(e => e.Id == id);
