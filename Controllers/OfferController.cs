@@ -17,13 +17,25 @@ namespace PayPlus.Controllers
         }
 
         // GET: Offer
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchOffers)
         {
-            var offers = await _context.Offers
+            ViewData["CurrentFilter"] = searchOffers;
+    
+            var offers = _context.Offers
                 .Include(o => o.Partner)
                 .Include(o => o.Services)
-                .ToListAsync();
-            return View(offers);
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchOffers))
+            {
+                offers = offers.Where(o =>
+                    o.Partner.Name.ToLower().Contains(searchOffers) ||
+                    o.Services.Any(s => s.ServiceName.ToLower().Contains(searchOffers)) ||
+                    o.TotalPrice.ToString().Contains(searchOffers) ||
+                    o.Date.ToString().Contains(searchOffers));
+            }
+
+            return View(await offers.ToListAsync());
         }
 
         // GET: Offer/Details/5

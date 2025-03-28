@@ -1,4 +1,4 @@
-@model IEnumerable<PayPlus.Models.Offer> 
+@model IEnumerable<PayPlus.Models.Offer>
 @using PayPlus.Extensions
 
 @{
@@ -11,8 +11,14 @@
             <a class="btn button-dodaj-storitev-partnerja" asp-action="Create">
                 <i class="ti ti-plus"></i> Add Offer
             </a>
-
-            <input type="search" class="form-control w-25 ms-3" placeholder="Search offers..." aria-label="Search">
+            <form asp-action="Index" method="get">
+                <div class="container d-flex justify-content-left">
+                    <input name="searchOffers" type="search" class="form-control me-3" placeholder="Search offers..."
+                           value="@ViewData["CurrentFilter"]" aria-label="Search">
+                    <button class="btn btn-outline-primary me-3" type="submit">search</button>
+                    <a class="btn btn-outline-secondary me-3" asp-action="Index">reset</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
