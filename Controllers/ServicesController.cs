@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.EntityFrameworkCore;
 using PayPlus.Data;
 using PayPlus.Models;
@@ -15,9 +16,19 @@ namespace PayPlus.Controllers
         }
 
         // GET: Services
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchService)
         {
-            return View(await _context.Service.ToListAsync());
+            var services = from s in _context.Services
+                select s;
+
+            if (!string.IsNullOrEmpty(searchService))
+            {
+                services = services.Where(s =>
+                    s.ServiceName.Contains(searchService) ||
+                    s.ServiceDescription.Contains(searchService));
+            }
+            
+            return View(await services.ToListAsync());
         }
 
         // GET: Services/Details/5
