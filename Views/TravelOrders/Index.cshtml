@@ -6,14 +6,22 @@
 }
 
 <div class="card mt-3">
-    <div class="card-body">
+    <div class="card-body me-3">
         <div class="container d-flex justify-content-left">
             <a class="btn button-dodaj-storitev-partnerja" asp-action="Create">
-                <i class="ti ti-plus"></i> Add Travel Order
+                <i class="ti ti-plus"></i> Add Travel order
             </a>
 
-            <input type="search" class="form-control w-25 ms-3" placeholder="Search travel orders..."
-                   aria-label="Search">
+            <form asp-action="Index" method="get">
+                <div class="container d-flex justify-content-left">
+                    <input name="searchTerm" type="search" class="form-control me-3"
+                           placeholder="Search travel orders..."
+                           value="@ViewData["CurrentFilter"]"
+                           aria-label="Search">
+                    <button class="btn btn-outline-primary me-3" type="submit">search</button>
+                    <a class="btn btn-outline-secondary me-3" asp-action="Index">reset</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -17,9 +17,29 @@ namespace PayPlus.Controllers
         }
 
         // GET: TravelOrders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            return View(await _context.TravelOrder.ToListAsync());
+            var travelOrders = _context.TravelOrders.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                string searchLower = searchTerm.ToLower();
+                travelOrders = travelOrders.Where(t => 
+                    t.full_name_driver.ToLower().Contains(searchLower) ||
+                    t.location_start.ToLower().Contains(searchLower) ||
+                    t.location_end.ToLower().Contains(searchLower) ||
+                    t.car_brand_and_model.ToLower().Contains(searchLower) ||
+                    t.trip_reason.ToLower().Contains(searchLower) ||
+                    t.full_name_organizer.ToLower().Contains(searchLower) ||
+                    t.order_id.ToString().Contains(searchTerm) ||
+                    t.order_date.ToString().Contains(searchTerm) ||
+                    t.date_start.ToString().Contains(searchTerm) ||
+                    t.date_end.ToString().Contains(searchTerm) ||
+                    t.car_type.ToString().ToLower().Contains(searchLower));
+            }
+
+            ViewData["CurrentFilter"] = searchTerm;
+            return View(await travelOrders.ToListAsync());
         }
 
         // GET: TravelOrders/Details/5
