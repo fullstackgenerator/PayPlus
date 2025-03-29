@@ -8,10 +8,11 @@
         <div class="container d-flex justify-content-left">
             <form asp-action="Index" method="get">
                 <div class="container d-flex justify-content-left">
-                    <input name="searchService" type="search" class="form-control me-3" placeholder="Search invoice..."
+                    <input name="searchInvoices" type="search" class="form-control me-3"
+                           placeholder="Search invoices..." value="@Context.Request.Query["searchInvoices"]"
                            aria-label="Search">
-                    <button class="btn btn-outline-primary me-3" type="submit">search</button>
-                    <a class="btn btn-outline-secondary me-3" asp-action="Index">reset</a>
+                    <button class="btn btn-outline-primary me-3" type="submit">Search</button>
+                    <a class="btn btn-outline-secondary me-3" asp-action="Index">Reset</a>
                 </div>
             </form>
         </div>

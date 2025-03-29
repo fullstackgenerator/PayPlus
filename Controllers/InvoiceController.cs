@@ -17,12 +17,24 @@ namespace PayPlus.Controllers
         }
 
         // GET: Invoice
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchInvoices)
         {
-            var invoices = await _context.Invoice
+            var query = _context.Invoice
                 .Include(i => i.Partner)
-                .Include(i => i.Services) // Include services
-                .ToListAsync();
+                .Include(i => i.Services)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchInvoices))
+            {
+                string searchTerm = searchInvoices.ToLower();
+                query = query.Where(i => 
+                    (i.Partner != null && i.Partner.Name.ToLower().Contains(searchTerm)) ||
+                    i.Services.Any(s => s.ServiceName.ToLower().Contains(searchTerm)) ||
+                    i.TotalPrice.ToString().Contains(searchInvoices) ||
+                    i.Date.ToString().Contains(searchInvoices));
+            }
+    
+            var invoices = await query.ToListAsync();
             return View(invoices);
         }
 
