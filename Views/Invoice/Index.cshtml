@@ -1,14 +1,19 @@
 @model IEnumerable<PayPlus.Models.Invoice>
-@using PayPlus.Extensions
 
 @{
     ViewData["Title"] = "Invoices";
 }
-
 <div class="card mt-3">
-    <div class="card-body">
+    <div class="card-body me-3">
         <div class="container d-flex justify-content-left">
-           <input type="search" class="form-control w-25 ms-3" placeholder="Search invoices..." aria-label="Search">
+            <form asp-action="Index" method="get">
+                <div class="container d-flex justify-content-left">
+                    <input name="searchService" type="search" class="form-control me-3" placeholder="Search invoice..."
+                           aria-label="Search">
+                    <button class="btn btn-outline-primary me-3" type="submit">search</button>
+                    <a class="btn btn-outline-secondary me-3" asp-action="Index">reset</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -51,3 +56,4 @@
         </table>
     </div>
 </div>
+
