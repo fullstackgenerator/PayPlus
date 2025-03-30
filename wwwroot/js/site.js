@@ -3,16 +3,28 @@
 
 // Write your JavaScript code.
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth', // Month view
+        initialView: 'dayGridMonth',
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source'
+        schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+        events: '/Calendar/GetInvoiceEvents',
+        eventClick: function(info) {
+            // Show invoice details when clicked
+            var services = info.event.extendedProps.services;
+            var total = info.event.extendedProps.total;
+
+            Swal.fire({
+                title: info.event.title,
+                html: `<p>Services: ${services}</p><p>Total: ${total}</p>`,
+                confirmButtonText: 'OK'
+            });
+        }
     });
     calendar.render();
 });

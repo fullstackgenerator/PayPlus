@@ -36,6 +36,11 @@ app.UseAuthorization();
 app.MapStaticAssets();
 
 app.MapControllerRoute(
+    name: "calendar",
+    pattern: "calendar/{action=Index}/{id?}",
+    defaults: new { controller = "Calendar" });
+
+app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();

@@ -227,7 +227,8 @@ namespace PayPlus.Controllers
                         col.Item().Text("Services:");
                         foreach (var service in invoice.Services)
                         {
-                            col.Item().Text($"- {service.ServiceName}: {service.Price:C}");
+                            col.Item().Text($"{service.ServiceName}: {service.Price:C}");
+
                         }
 
                         col.Item().PaddingVertical(10);

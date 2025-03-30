@@ -29,7 +29,7 @@ namespace PayPlus.Controllers
             if (!string.IsNullOrEmpty(searchOffers))
             {
                 offers = offers.Where(o =>
-                    o.Partner.Name.ToLower().Contains(searchOffers) ||
+                    o.Partner != null && o.Partner.Name.ToLower().Contains(searchOffers) ||
                     o.Services.Any(s => s.ServiceName.ToLower().Contains(searchOffers)) ||
                     o.TotalPrice.ToString().Contains(searchOffers) ||
                     o.Date.ToString().Contains(searchOffers));
@@ -84,7 +84,7 @@ namespace PayPlus.Controllers
         // POST: Offer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PartnerId,TotalPrice")] Offer offer, List<int> ServiceIds)
+        public async Task<IActionResult> Create([Bind("PartnerId,Date,TotalPrice")] Offer offer, List<int> ServiceIds)
         {
             if (ModelState.IsValid)
             {
@@ -140,7 +140,7 @@ namespace PayPlus.Controllers
         // POST: Offer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PartnerId,OfferDate,TotalPrice")] Offer offer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PartnerId,Date,TotalPrice")] Offer offer)
         {
             if (id != offer.Id)
             {
@@ -226,7 +226,7 @@ namespace PayPlus.Controllers
                         col.Item().Text("Services:");
                         foreach (var service in offer.Services)
                         {
-                            col.Item().Text($"- {service.ServiceName}: {service.Price:C}");
+                            col.Item().Text($"{service.ServiceName}: {service.Price:C}");
                         }
 
                         col.Item().PaddingVertical(10);

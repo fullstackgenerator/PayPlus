@@ -20,6 +20,12 @@
                         <span asp-validation-for="PartnerId" class="text-danger"></span>
                     </div>
                     <div class="col-md-6 py-2">
+                        <label asp-for="Date" class="form-label"></label>
+                        <input asp-for="Date" type="date" class="form-control"
+                               value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 py-2">
                         <label class="control-label">Services</label>
                         <select name="ServiceIds" class="form-control" multiple asp-items="ViewBag.Services"></select>
                     </div>
