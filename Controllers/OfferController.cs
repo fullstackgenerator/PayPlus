@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PayPlus.Data;
 using PayPlus.Models;
 using QuestPDF.Fluent;
+using System.Globalization;
 
 namespace PayPlus.Controllers
 {
@@ -74,7 +75,7 @@ namespace PayPlus.Controllers
                 .Select(s => new SelectListItem
                 {
                     Value = s.Id.ToString(),
-                    Text = $"{s.ServiceName} - {s.Price:C}"
+                    Text = $"{s.ServiceName} - {s.Price.ToString("0.00", CultureInfo.InvariantCulture)} €"
                 })
                 .ToListAsync();
 
