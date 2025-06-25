@@ -44,7 +44,7 @@ Lastly, the final data is passed to the Calendar module for a clearer visual und
 
 ![image](https://github.com/user-attachments/assets/c665c6f7-75d5-44ea-8215-152ac2e3611d)
 
-An additional part of the app is the Travel Orders module, where the user can create and manage travel orders/requests for employees and export them as a PDF.
+An additional part of the app is the Travel Orders module, where the user can create and manage travel orders/requests and export them as a PDF.
 
 ![image](https://github.com/user-attachments/assets/4282045e-40f6-4430-a8cb-df315a86210f)
 
