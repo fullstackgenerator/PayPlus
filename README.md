@@ -1,4 +1,8 @@
-PayPlus is an ASP.NET Core MVC business management tool that simplifies service tracking, client offers, and invoicing in one integrated system. Designed for efficiency, it handles everything from automated calculations to professional PDF exports while keeping your workflow organized.
+## PayPlus
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+An ASP.NET Core MVC business management tool that simplifies service tracking, client offers, and invoicing in one integrated system. Designed for efficiency, it handles everything from automated calculations to professional PDF exports while keeping your workflow organized.
 
 The Services module allows users to define and manage the services they offer, including Service Name, Description, and Price, as well as a search option (present in every module).
 
@@ -47,3 +51,7 @@ An additional part of the app is the Travel Orders module, where the user can cr
 ![image](https://github.com/user-attachments/assets/1f95f9a3-a493-43cb-a050-1491054a62dd)
 
 ![image](https://github.com/user-attachments/assets/1648d351-11bb-4d69-953f-240a39356e2c)
+
+### License
+
+This project is licensed under the [MIT License](LICENSE).
